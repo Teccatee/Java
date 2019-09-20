@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Scanner;
 
-//prova commento
+
 public class Client {
     public static void main(String args[]) {
         String address = args[0];
