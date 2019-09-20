@@ -5,6 +5,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Server extends UnicastRemoteObject implements ServerInterface {
 
@@ -17,10 +18,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public String logIn(String a, String b) throws RemoteException {
-        List<User> list = initializeList();
-        for(int i=0; i< list.size(); i++) {
-            if(list.get(i).getId().compareTo(a)==0 && list.get(i).getPsw().compareTo(b)==0)
+    public String logIn(String a, String b, List<User> c) throws RemoteException {
+        for(int i=0; i< c.size(); i++) {
+            if(c.get(i).getId().compareTo(a)==0 && c.get(i).getPsw().compareTo(b)==0)
                 return "Accesso eseguito correttamente";
         }
         return "Accesso fallito";
@@ -30,6 +30,12 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public List<User> allUsers() throws RemoteException {
         return userList;
     }
+
+    @Override
+    public void addUsers(List<User> new_list) throws RemoteException {
+        this.userList = new_list;
+    }
+
 
     private static List<User> initializeList() {
         List<User> list = new ArrayList<>();

@@ -15,47 +15,83 @@ public class Client {
             System.out.println("Usage: java Client <address> <servicename>");
         }
         try {
-            ServerInterface si = (ServerInterface) Naming.lookup("rmi://"+address+"/"+servicename);
+            ServerInterface si = (ServerInterface) Naming.lookup("rmi://" + address + "/" + servicename);
             Scanner log = new Scanner(System.in);
             List<User> list = si.allUsers();
-            System.out.println("\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tBENVENUTO\n\t\t#\n\t\t# 1) Log in\n\t\t#\n\t\t# 2) Create an account\n\t\t#\n\t\t# # # # # # # # # # # # # # # # # # # #");
-            int choise = log.nextInt();
+            boolean f = true;
 
-            switch (choise) {
 
-                case 1:
 
-                    System.out.printf("\nUser ID = ");
-                    String id = log.next();
-                    System.out.printf("Password = ");
-                    String psw = log.next();
-                    System.out.println(si.logIn(id, psw));
-                    System.out.println("\n\n\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tMenu\n\t\t#\n\t\t# 1) Edit Account\n\t\t#\n\t\t# 2) All Users\n\t\t#\n\t\t# # # # # # # # # # # # # # # # # # # #");
-                    choise = log.nextInt();
+            while (f) {
+                title();
+                int choose = log.nextInt();
+                switch (choose) {
+                    case 1:
+                        System.out.printf("\n\n\t\tUser ID = ");
+                        String id = log.next();
+                        System.out.printf("\n\t\tPassword = ");
+                        String psw = log.next();
+                        System.out.println(si.logIn(id, psw, list));
+                        menu();
+                        choose = log.nextInt();
 
-                    switch (choise) {
+                        switch (choose) {
 
-                        case 1:
-                            break;
+                            case 1:
+                                break;
 
-                        case 2:
-                            System.out.println(list);
-                            break;
+                            case 2:
+                                System.out.println(list);
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                System.out.println("Error, wrong digit");
+                                break;
+                        }
+                        break;
 
-                        default:
-                            System.out.println("Error, wrong digit");
-                            break;
-                    }
-                    break;
-
-                case 2:
-                    break;
-                default:
-                    System.out.println("Error, wrong digit");
-                    break;
+                    case 2:
+                        boolean flag = true;
+                        System.out.printf("\n\n\t\tUser ID = ");
+                        id = log.next();
+                        while (flag) {
+                            for (int i = 0; i < list.size(); i++) {
+                                if (list.get(i).getId().compareTo(id) == 0)
+                                    flag = false;
+                            }
+                            if (flag == false) {
+                                System.out.println("\n\tError! ID already exists. Choose another name.");
+                                System.out.printf("\n\t\tUser ID = ");
+                                id = log.next();
+                                flag = true;
+                            } else {
+                                System.out.println("\n\n\t\tID available.\n\t\tName = ");
+                                String n = log.next();
+                                System.out.println("\n\t\tSurname = ");
+                                String s = log.next();
+                                System.out.println("\n\t\tEmail = ");
+                                String e = log.next();
+                                System.out.println("\n\t\tVeichle = ");
+                                String v = log.next();
+                                System.out.println("\n\t\tCV = ");
+                                String c = log.next();
+                                System.out.println("\n\t\tPassword = ");
+                                String p = log.next();
+                                list.add(new User(n, s, e, v, c, id, p));
+                                si.addUsers(list);
+                                break;
+                            }
+                        }
+                        break;
+                    case 3:
+                        f = false;
+                        break;
+                    default:
+                        System.out.println("Error, wrong digit");
+                        break;
+                }
             }
-
-
 
         } catch (NotBoundException e) {
             e.printStackTrace();
@@ -64,5 +100,25 @@ public class Client {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void title() {
+        System.out.println("\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tWELCOME\n\t\t#\n\t\t# " +
+                "1) Log in\n\t\t#\n\t\t# " +
+                "2) Create an account\n\t\t#\n\t\t# " +
+                "3) Exit\n\t\t#\n\t\t" +
+                "# # # # # # # # # # # # # # # # # # # #");
+    }
+
+    public static void menu() {
+        System.out.println("\n\n\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tMenu\n\t\t#\n\t\t# " +
+                "1) Edit Account\n\t\t#\n\t\t# " +
+                "2) All Users\n\t\t#\n\t\t" +
+                "3) Log out\n\t\t#\n\t\t" +
+                "# # # # # # # # # # # # # # # # # # # #");
+    }
+
+    public static void logIn() {
+
     }
 }
