@@ -29,30 +29,16 @@ public class Client {
                     case 1:
                         System.out.printf("\n\n\t\tUser ID = ");
                         String id = log.next();
-                        System.out.printf("\n\t\tPassword = ");
-                        String psw = log.next();
-                        String access = si.logIn(id, psw, list);
-                        System.out.println(access);
-                        if(access.compareTo("Accesso eseguito correttamente")==0) {
-                            menu();
-                            choose = log.nextInt();
-                        }
-                        else
-                            title();
-
-                        switch (choose) {
-
-                            case 1:
-                                break;
-
-                            case 2:
-                                System.out.println(list);
-                                break;
-                            case 3:
-                                break;
-                            default:
-                                System.out.println("Error, wrong digit");
-                                break;
+                        String access = si.logIn(id, list);
+                        if(access.compareTo("Fail")==0)
+                            System.out.println("\n\t\tUser not found!\n");
+                        else {
+                            System.out.printf("\n\t\tPassword = ");
+                            String psw = log.next();
+                            if (access.compareTo(psw) == 0)
+                                menu(id, list);
+                            else
+                                System.out.printf("\n\t\tWrong password!\n");
                         }
                         break;
 
@@ -115,12 +101,34 @@ public class Client {
                 "# # # # # # # # # # # # # # # # # # # #");
     }
 
-    public static void menu() {
-        System.out.println("\n\n\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tMenu\n\t\t#\n\t\t# " +
-                "1) Edit Account\n\t\t#\n\t\t# " +
-                "2) All Users\n\t\t#\n\t\t" +
-                "3) Log out\n\t\t#\n\t\t" +
-                "# # # # # # # # # # # # # # # # # # # #");
+    public static void menu(String id_name, List<User> list) {
+        Scanner log = new Scanner(System.in);
+        int choose=0;
+        while (choose!=3){
+            System.out.println("\n\n\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tWelcome " +id_name+ "\n\t\t#\n\t\t# " +
+                    "1) Edit Account\n\t\t#\n\t\t# " +
+                    "2) All Users\n\t\t#\n\t\t# " +
+                    "3) Log out\n\t\t#\n\t\t" +
+                    "# # # # # # # # # # # # # # # # # # # #");
+            choose = log.nextInt();
+            switch (choose) {
+
+                case 1:
+
+                    break;
+
+                case 2:
+                    System.out.println(list);
+                    break;
+
+                case 3:
+                    break;
+
+                default:
+                    System.out.println("\n\t\tError, wrong digit");
+                    break;
+            }
+        }
     }
 
     public static void logIn() {

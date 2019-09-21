@@ -18,12 +18,13 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public String logIn(String a, String b, List<User> c) throws RemoteException {
+    public String logIn(String a, List<User> c) throws RemoteException {
         for(int i=0; i< c.size(); i++) {
-            if(c.get(i).getId().compareTo(a)==0 && c.get(i).getPsw().compareTo(b)==0)
-                return "Accesso eseguito correttamente";
+            if(c.get(i).getId().compareTo(a)==0 /*&& c.get(i).getPsw().compareTo(b)==0*/)
+                return c.get(i).getPsw();
+                //return "Accesso eseguito correttamente";
         }
-        return "Accesso fallito";
+        return "Fail";
     }
 
     @Override
