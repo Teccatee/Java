@@ -138,12 +138,12 @@ public class Client {
                     if(a.compareTo("Email")==0) {
                         System.out.printf("New Email: ");
                         a = log.next();
-                        list.get(i).s(a);
+                        list.get(i).setEmail(a);
                     }
                     if(a.compareTo("Vehicle")==0) {
                         System.out.printf("New Vehicle: ");
                         a = log.next();
-                        list.get(i).set(a);
+                        list.get(i).setVehicle(a);
                     }
 
                 }
