@@ -31,9 +31,14 @@ public class Client {
                         String id = log.next();
                         System.out.printf("\n\t\tPassword = ");
                         String psw = log.next();
-                        System.out.println(si.logIn(id, psw, list));
-                        menu();
-                        choose = log.nextInt();
+                        String access = si.logIn(id, psw, list);
+                        System.out.println(access);
+                        if(access.compareTo("Accesso eseguito correttamente")==0) {
+                            menu();
+                            choose = log.nextInt();
+                        }
+                        else
+                            title();
 
                         switch (choose) {
 
