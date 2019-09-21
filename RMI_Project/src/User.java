@@ -42,7 +42,7 @@ public class User implements Serializable {
 
     public String getPsw() { return psw;}
 
-    public void setPsw(String id) { this.psw = psw; }
+    public void setPsw(String psw) { this.psw = psw; }
 
     public void setVehicle(String vehicle) { this.vehicle = vehicle; }
 
