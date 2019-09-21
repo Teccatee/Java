@@ -118,7 +118,7 @@ public class Client {
                 case 1: {
                     System.out.printf("\nName " +list.get(i).getName());
                     System.out.printf("\nPassword " +list.get(i).getPsw());
-                    System.out.printf("\nId " +list.get(i).getId());
+                    //System.out.printf("\nId " +list.get(i).getId());
                     System.out.printf("\nEmail " +list.get(i).getEmail());
                     System.out.printf("\nVehicle " +list.get(i).getVehicle());
                     System.out.printf("\n\n\nEdit: ");
@@ -138,12 +138,12 @@ public class Client {
                     if(a.compareTo("Email")==0) {
                         System.out.printf("New Email: ");
                         a = log.next();
-                        list.get(i).setName(a);
+                        list.get(i).s(a);
                     }
                     if(a.compareTo("Vehicle")==0) {
                         System.out.printf("New Vehicle: ");
                         a = log.next();
-                        list.get(i).setName(a);
+                        list.get(i).set(a);
                     }
 
                 }

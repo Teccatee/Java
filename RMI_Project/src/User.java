@@ -44,6 +44,10 @@ public class User implements Serializable {
 
     public void setPsw(String id) { this.psw = psw; }
 
+    public void setVehicle(String vehicle) { this.vehicle = vehicle; }
+
+    public void setEmail(String email) { this.email = email; }
+
 
     public void setName(String name) {
         this.name = name;
