@@ -26,6 +26,15 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
         return "Fail";
     }
+    @Override
+    public int FindUser(String b, List<User> d) throws RemoteException {
+        int j;
+        for (j = 0; j < d.size(); j++) {
+            if (d.get(j).getId().compareTo(b) == 0)
+                break;
+        }
+        return j;
+    }
 
     @Override
     public List<User> allUsers() throws RemoteException {

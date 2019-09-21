@@ -35,8 +35,10 @@ public class Client {
                         else {
                             System.out.printf("\n\t\tPassword = ");
                             String psw = log.next();
-                            if (access.compareTo(psw) == 0)
-                                menu(id, list);
+                            if (access.compareTo(psw) == 0) {
+                                int i = si.FindUser(id, list);
+                                menu(id, list, i);
+                            }
                             else
                                 System.out.printf("\n\t\tWrong password!\n");
                         }
@@ -93,7 +95,7 @@ public class Client {
         }
     }
 
-    public static void title() {
+    private static void title() {
         System.out.println("\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tWELCOME\n\t\t#\n\t\t# " +
                 "1) Log in\n\t\t#\n\t\t# " +
                 "2) Create an account\n\t\t#\n\t\t# " +
@@ -101,7 +103,7 @@ public class Client {
                 "# # # # # # # # # # # # # # # # # # # #");
     }
 
-    public static void menu(String id_name, List<User> list) {
+    private static void menu(String id_name, List<User> list, int i) {
         Scanner log = new Scanner(System.in);
         int choose=0;
         while (choose!=3){
@@ -113,7 +115,38 @@ public class Client {
             choose = log.nextInt();
             switch (choose) {
 
-                case 1:
+                case 1: {
+                    System.out.printf("\nName " +list.get(i).getName());
+                    System.out.printf("\nPassword " +list.get(i).getPsw());
+                    System.out.printf("\nId " +list.get(i).getId());
+                    System.out.printf("\nEmail " +list.get(i).getEmail());
+                    System.out.printf("\nVehicle " +list.get(i).getVehicle());
+                    System.out.printf("\n\n\nEdit: ");
+                    String a = log.next();
+                    if(a.isEmpty())
+                        System.out.printf("\nChoose a field to edit");
+                    if(a.compareTo("Name")==0) {
+                        System.out.printf("New Name: ");
+                        a = log.next();
+                        list.get(i).setName(a);
+                    }
+                    if(a.compareTo("Password")==0) {
+                        System.out.printf("New Password: ");
+                        a = log.next();
+                        list.get(i).setPsw(a);
+                    }
+                    if(a.compareTo("Email")==0) {
+                        System.out.printf("New Email: ");
+                        a = log.next();
+                        list.get(i).setName(a);
+                    }
+                    if(a.compareTo("Vehicle")==0) {
+                        System.out.printf("New Vehicle: ");
+                        a = log.next();
+                        list.get(i).setName(a);
+                    }
+
+                }
 
                     break;
 

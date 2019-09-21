@@ -34,6 +34,10 @@ public class User implements Serializable {
 
     public String getId() { return id;}
 
+    public String getVehicle() { return vehicle; }
+
+    public String getEmail() { return email;}
+
     public void setId(String id) { this.id = id; }
 
     public String getPsw() { return psw;}
