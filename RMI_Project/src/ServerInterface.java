@@ -7,7 +7,7 @@ public interface ServerInterface extends Remote {
     String logIn(String a, List<User> c) throws RemoteException;
     List<User> allUsers() throws RemoteException;
     void addUsers(List<User> new_list) throws RemoteException;
-    int FindUser(String a, List<User> c) throws RemoteException;
+    int [] FindUser(String a, List<User> c) throws RemoteException;
 
 }
 

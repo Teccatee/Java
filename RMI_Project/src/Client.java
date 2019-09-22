@@ -36,8 +36,8 @@ public class Client {
                             System.out.printf("\n\t\tPassword = ");
                             String psw = log.next();
                             if (access.compareTo(psw) == 0) {
-                                int i = si.FindUser(id, list);
-                                menu(id, list, i);
+                                int i[] = si.FindUser(id, list);
+                                menu(id, list, i[0]);
                             }
                             else
                                 System.out.printf("\n\t\tWrong password!\n");
@@ -116,11 +116,7 @@ public class Client {
             switch (choose) {
 
                 case 1: {
-                    System.out.printf("\nName " +list.get(i).getName());
-                    System.out.printf("\nPassword " +list.get(i).getPsw());
-                    //System.out.printf("\nId " +list.get(i).getId());
-                    System.out.printf("\nEmail " +list.get(i).getEmail());
-                    System.out.printf("\nVehicle " +list.get(i).getVehicle());
+                    System.out.printf(list.get(i).toString());
                     System.out.printf("\n\n\nEdit: ");
                     String a = log.next();
                     if(a.isEmpty())
