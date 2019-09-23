@@ -61,7 +61,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return list;
     }
 
-    public int LoadTxtFile (List<User> c) throws RemoteException{
+    public void LoadTxtFile (List<User> c) throws RemoteException{
         int j=0;
         BufferedReader reader = null;
         try {
@@ -103,7 +103,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    return j;
+    System.out.printf("Loading successfull "+j+" users from local database!\n");
     }
 
     public static void main(String args[]){

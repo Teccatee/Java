@@ -19,9 +19,8 @@ public class Client {
             Scanner log = new Scanner(System.in);
             List<User> list = si.allUsers();
             boolean f = true;
-
-
-
+            si.LoadTxtFile(list);
+            list = si.allUsers();
             while (f) {
                 title();
                 int choose = log.nextInt();
@@ -81,11 +80,6 @@ public class Client {
                         f = false;
                         break;
 
-                    case 4:
-                        System.out.printf("Loading successfull "+si.LoadTxtFile(list)+" users!\n");
-                        list = si.allUsers();
-                        break;
-
                     default:
                         System.out.println("Error, wrong digit");
                         break;
@@ -105,8 +99,7 @@ public class Client {
         System.out.println("\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tWELCOME\n\t\t#\n\t\t# " +
                 "1) Log in\n\t\t#\n\t\t# " +
                 "2) Create an account\n\t\t#\n\t\t# " +
-                "3) Exit\n\t\t#\n\t\t#" +
-                "4) Load local database\n\t\t#\n\t\t"+
+                "3) Exit\n\t\t#\n\t\t" +
                 "# # # # # # # # # # # # # # # # # # # #");
     }
 
