@@ -82,7 +82,7 @@ public class Client {
                         break;
 
                     case 4:
-                        si.LoadTxtFile(list);
+                        System.out.printf("Loading successfull "+si.LoadTxtFile(list)+" users!\n");
                         list = si.allUsers();
                         break;
 

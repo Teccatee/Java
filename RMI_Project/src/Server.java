@@ -61,8 +61,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return list;
     }
 
-    public void LoadTxtFile (List<User> c) throws RemoteException{
-
+    public int LoadTxtFile (List<User> c) throws RemoteException{
+        int j=0;
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader("Database.txt"));
@@ -70,23 +70,29 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             e.printStackTrace();
         }
         try {
+
             String line = reader.readLine();
             while (line!=null) {
                 StringTokenizer st = new StringTokenizer(line);
                 while (st.hasMoreElements()) {
                     String n= (String) st.nextElement();
-                    System.out.printf(n);
                     String s= (String) st.nextElement();
-                    System.out.printf(s);
                     String e= (String) st.nextElement();
                     String v= (String) st.nextElement();
                     String cv= (String) st.nextElement();
                     String id= (String) st.nextElement();
                     String p= (String) st.nextElement();
-                    c.add(new User(n, s, e, v, cv, id, p));
-                    addUsers(c);
+                    int i[]=FindUser(id, c);
+                    j++;
+                    if (i[1]==1) {
+                        j--;
+                        break;
+                    }
+                    else {
+                        c.add(new User(n, s, e, v, cv, id, p));
+                        addUsers(c);
+                    }
                 }
-             System.out.println("\nLoad successfull!\n" +line);
             line = reader.readLine();
             }
         } catch (IOException e) {
@@ -97,7 +103,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    return j;
     }
 
     public static void main(String args[]){
