@@ -83,6 +83,7 @@ public class Client {
 
                     case 4:
                         si.LoadTxtFile(list);
+                        list = si.allUsers();
                         break;
 
                     default:

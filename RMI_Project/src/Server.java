@@ -71,11 +71,13 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
         try {
             String line = reader.readLine();
-            StringTokenizer st = new StringTokenizer(line);
             while (line!=null) {
+                StringTokenizer st = new StringTokenizer(line);
                 while (st.hasMoreElements()) {
                     String n= (String) st.nextElement();
+                    System.out.printf(n);
                     String s= (String) st.nextElement();
+                    System.out.printf(s);
                     String e= (String) st.nextElement();
                     String v= (String) st.nextElement();
                     String cv= (String) st.nextElement();
@@ -84,7 +86,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                     c.add(new User(n, s, e, v, cv, id, p));
                     addUsers(c);
                 }
-             System.out.printf("Load successfull!\n");
+             System.out.println("\nLoad successfull!\n" +line);
             line = reader.readLine();
             }
         } catch (IOException e) {
