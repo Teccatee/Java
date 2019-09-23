@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -6,6 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Server extends UnicastRemoteObject implements ServerInterface {
 
@@ -56,6 +61,42 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return list;
     }
 
+    public void LoadTxtFile (List<User> c) throws RemoteException{
+
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("Database.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            String line = reader.readLine();
+            StringTokenizer st = new StringTokenizer(line);
+            while (line!=null) {
+                while (st.hasMoreElements()) {
+                    String n= (String) st.nextElement();
+                    String s= (String) st.nextElement();
+                    String e= (String) st.nextElement();
+                    String v= (String) st.nextElement();
+                    String cv= (String) st.nextElement();
+                    String id= (String) st.nextElement();
+                    String p= (String) st.nextElement();
+                    c.add(new User(n, s, e, v, cv, id, p));
+                    addUsers(c);
+                }
+             System.out.printf("Load successfull!\n");
+            line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public static void main(String args[]){
 

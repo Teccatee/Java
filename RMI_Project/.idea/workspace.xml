@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="389de4c4-0428-4b87-8bfa-09a2803a5240" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Database.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +44,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/progdist/readwritefile" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />

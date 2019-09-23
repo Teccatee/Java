@@ -80,6 +80,11 @@ public class Client {
                     case 3:
                         f = false;
                         break;
+
+                    case 4:
+                        si.LoadTxtFile(list);
+                        break;
+
                     default:
                         System.out.println("Error, wrong digit");
                         break;
@@ -99,7 +104,8 @@ public class Client {
         System.out.println("\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tWELCOME\n\t\t#\n\t\t# " +
                 "1) Log in\n\t\t#\n\t\t# " +
                 "2) Create an account\n\t\t#\n\t\t# " +
-                "3) Exit\n\t\t#\n\t\t" +
+                "3) Exit\n\t\t#\n\t\t#" +
+                "4) Load local database\n\t\t#\n\t\t"+
                 "# # # # # # # # # # # # # # # # # # # #");
     }
 
@@ -158,9 +164,5 @@ public class Client {
                     break;
             }
         }
-    }
-
-    public static void logIn() {
-
     }
 }
