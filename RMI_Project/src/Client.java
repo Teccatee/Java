@@ -18,8 +18,9 @@ public class Client {
             ServerInterface si = (ServerInterface) Naming.lookup("rmi://" + address + "/" + servicename);
             Scanner log = new Scanner(System.in);
             List<User> list = si.allUsers();
+            Server server = new Server(list);
             boolean f = true;
-            si.LoadTxtFile(list);
+
             while (f) {
                 title();
                 int choose = log.nextInt();
@@ -35,7 +36,7 @@ public class Client {
                             String psw = log.next();
                             if (access.compareTo(psw) == 0) {
                                 int i[] = si.FindUser(id, list);
-                                menu(id, list, i[0]);
+                                menu(id, list, i[0], si);
                             }
                             else
                                 System.out.printf("\n\t\tWrong password!\n");
@@ -57,20 +58,22 @@ public class Client {
                                 id = log.next();
                                 flag = true;
                             } else {
-                                System.out.println("\n\n\t\tID available.\n\t\tName = ");
+                                System.out.printf("\n\t\tName = ");
                                 String n = log.next();
-                                System.out.println("\n\t\tSurname = ");
+                                System.out.printf("\n\t\tSurname = ");
                                 String s = log.next();
-                                System.out.println("\n\t\tEmail = ");
+                                System.out.printf("\n\t\tEmail = ");
                                 String e = log.next();
-                                System.out.println("\n\t\tVeichle = ");
+                                System.out.printf("\n\t\tVeichle = ");
                                 String v = log.next();
-                                System.out.println("\n\t\tCV = ");
+                                System.out.printf("\n\t\tCV = ");
                                 String c = log.next();
-                                System.out.println("\n\t\tPassword = ");
+                                System.out.printf("\n\t\tPassword = ");
                                 String p = log.next();
                                 list.add(new User(n, s, e, v, c, id, p));
                                 si.addUsers(list);
+                                si.SaveToTxtFile(list);
+                                server.setUserList(list);
                                 break;
                             }
                         }
@@ -84,6 +87,7 @@ public class Client {
                         System.out.println("Error, wrong digit");
                         break;
                 }
+                server.LoadTxtFile(list);
             }
 
         } catch (NotBoundException e) {
@@ -96,54 +100,60 @@ public class Client {
     }
 
     private static void title() {
-        System.out.println("\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tWELCOME\n\t\t#\n\t\t# " +
-                "1) Log in\n\t\t#\n\t\t# " +
-                "2) Create an account\n\t\t#\n\t\t# " +
-                "3) Exit\n\t\t#\n\t\t" +
-                "# # # # # # # # # # # # # # # # # # # #");
+        System.out.println("\n\t\tWELCOME\n\n\t\t1) Log in\n\t\t2) Create an account\n\t\t3) Exit");
+
     }
 
-    private static void menu(String id_name, List<User> list, int i) {
+    private static void menu(String id_name, List<User> list, int i, ServerInterface si) {
         Scanner log = new Scanner(System.in);
         int choose=0;
         while (choose!=3){
-            System.out.println("\n\n\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t#\tWelcome " +id_name+ "\n\t\t#\n\t\t# " +
-                    "1) Edit Account\n\t\t#\n\t\t# " +
-                    "2) All Users\n\t\t#\n\t\t# " +
-                    "3) Log out\n\t\t#\n\t\t" +
-                    "# # # # # # # # # # # # # # # # # # # #");
+            System.out.println("\n\n\t\t\tWelcome " +id_name+ "\n\n\t\t" +
+                    "1) Edit Account\n\t\t" +
+                    "2) All Users\n\t\t" +
+                    "3) Log out");
             choose = log.nextInt();
             switch (choose) {
 
-                case 1: {
+                case 1:
                     System.out.printf(list.get(i).toString());
-                    System.out.printf("\n\n\nEdit: ");
-                    String a = log.next();
-                    if(a.isEmpty())
-                        System.out.printf("\nChoose a field to edit");
-                    if(a.compareTo("Name")==0) {
-                        System.out.printf("New Name: ");
-                        a = log.next();
-                        list.get(i).setName(a);
+                    System.out.println("\n\tWhat do you want to edit?\n\1) Name\n2) Password\n3) Email\n4) Vehicle\n" +
+                            "5) Cv");
+                    String a;
+                    switch (choose) {
+                        case 1:
+                            System.out.printf("New Name: ");
+                            a = log.next();
+                            list.get(i).setName(a);
+                            break;
+                        case 2:
+                            System.out.println("New password");
+                            a = log.next();
+                            list.get(i).setPsw(a);
+                            break;
+                        case 3:
+                            System.out.printf("New Email: ");
+                            a = log.next();
+                            list.get(i).setEmail(a);
+                            break;
+                        case 4:
+                            System.out.printf("New Vehicle: ");
+                            a = log.next();
+                            list.get(i).setVehicle(a);
+                            break;
+                        case 5:
+                            System.out.printf("New Cv: ");
+                            a = log.next();
+                            list.get(i).setCv(a);
+                            break;
+                            default:
+                                break;
                     }
-                    if(a.compareTo("Password")==0) {
-                        System.out.printf("New Password: ");
-                        a = log.next();
-                        list.get(i).setPsw(a);
+                    try {
+                        si.SaveToTxtFile(list);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
                     }
-                    if(a.compareTo("Email")==0) {
-                        System.out.printf("New Email: ");
-                        a = log.next();
-                        list.get(i).setEmail(a);
-                    }
-                    if(a.compareTo("Vehicle")==0) {
-                        System.out.printf("New Vehicle: ");
-                        a = log.next();
-                        list.get(i).setVehicle(a);
-                    }
-
-                }
-
                     break;
 
                 case 2:

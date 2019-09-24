@@ -1,5 +1,8 @@
+import javax.swing.plaf.ListUI;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -12,6 +15,9 @@ import java.util.StringTokenizer;
 public class Server extends UnicastRemoteObject implements ServerInterface {
 
     private List<User> userList;
+
+    public List<User> getUserList() { return userList; }
+    public List<User> setUserList(List<User> a) { return userList = a; }
 
 
     public Server(List<User> list) throws RemoteException {
@@ -124,8 +130,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
     }
 
-
-
     public void LoadTxtFile (List<User> c) throws RemoteException{
         int j=0;
         BufferedReader reader = null;
@@ -174,19 +178,28 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public static void main(String args[]){
 
         try {
-            //System.setProperty("java.rmi.server.hostname","localhost");
+            System.setProperty("java.rmi.server.hostname","localhost");
 
             // when testing on remote node, a registry previously located must be used
             Registry registry = LocateRegistry.getRegistry();
             ServerInterface server = new Server(initializeList());
+            Server s = new Server(initializeList());
             // when testing on remote node, a registry previously located must be used
-            registry.bind("databaseservice",server);
+            //registry.bind("databaseservice",server);
             // when testing on local:
-            //Naming.rebind("calculatorservice",server);
+            Naming.rebind("databaseservice",server);
+
+            while(true) {
+                Thread.sleep(5000);
+                server.LoadTxtFile(s.userList);
+                server.SaveToTxtFile(s.userList);
+            }
 
         } catch (RemoteException e) {
             e.printStackTrace();
-        } catch (AlreadyBoundException e) {
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         /*

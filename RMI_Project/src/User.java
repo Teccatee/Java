@@ -23,9 +23,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "\n\n\t\t# # # # # # # # # # # # # # # # # # # #\n\t\t#\n\t\t# Utente:" + "\n\t\t# Name = " + name +
-                "\n\t\t# Surname = " + surname + "\n\t\t# Email = " + email + "\n\t\t# Vehicle = " + vehicle +
-                "\n\t\t# Cv = " + cv + "\n\t\t#\n\t\t# # # # # # # # # # # # # # # # # # # #\n";
+        return "\n\n\t\t" + name + "\n\t\t" + surname + "\n\t\t" + email + "\n\t\t" + vehicle + "\n\t\t" + cv;
     }
 
     public String getName() {
@@ -55,5 +53,7 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setCv(String cv) { this.cv = cv;}
 
 }
