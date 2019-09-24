@@ -61,7 +61,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public void SaveToTxtFile (List <User> c) throws RemoteException {
         int i;
         FileWriter fw = null;
-        System.out.printf("\nUpdating Local Database..\n");
+        System.out.printf("\nUpdating local database..\n");
         try {
             fw = new FileWriter("Database.txt", false);
         } catch (IOException e) {
@@ -178,9 +178,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
             // when testing on remote node, a registry previously located must be used
             Registry registry = LocateRegistry.getRegistry();
-
             ServerInterface server = new Server(initializeList());
-
             // when testing on remote node, a registry previously located must be used
             registry.bind("databaseservice",server);
             // when testing on local:

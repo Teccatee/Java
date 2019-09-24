@@ -20,7 +20,6 @@ public class Client {
             List<User> list = si.allUsers();
             boolean f = true;
             si.LoadTxtFile(list);
-            list = si.allUsers();
             while (f) {
                 title();
                 int choose = log.nextInt();
