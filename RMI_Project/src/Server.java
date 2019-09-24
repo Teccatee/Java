@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -55,11 +52,79 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
     private static List<User> initializeList() {
         List<User> list = new ArrayList<>();
-        list.add(new User("Daniel", "Pispisa", "danielpispisa@gmail.com", "Opel Astra", "130", "Pispis", "92"));
-        list.add(new User("Pippo", "La China", "pippolachina@gmail.com", "Fiat Punto", "80", "Pippo", "1234"));
-        list.add(new User("Pietro", "Pisacane", "pietropisacane@gmail.com", "Peugeot 206", "65", "Pietro", "pp"));
+        list.add(new User("Daniel", "Pispisa", "danielpispisa@gmail.com", "OpelAstra", "130", "Pispis", "92"));
+        list.add(new User("Pippo", "Lachina", "pippolachina@gmail.com", "FiatPunto", "80", "Pippo", "1234"));
+        list.add(new User("Pietro", "Pisacane", "pietropisacane@gmail.com", "Peugeot206", "65", "Pietro", "pp"));
         return list;
     }
+
+    public void SaveToTxtFile (List <User> c) throws RemoteException {
+        int i;
+        FileWriter fw = null;
+        System.out.printf("\nUpdating Local Database..\n");
+        try {
+            fw = new FileWriter("Database.txt", false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (i=0; i < c.size(); i++) {
+            try {
+                fw.write(c.get(i).getName());
+                fw.write(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.write(c.get(i).getSurname());
+                fw.write(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.write(c.get(i).getEmail());
+                fw.write(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.write(c.get(i).getVehicle());
+                fw.write(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.write(c.get(i).getCv());
+                fw.write(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.write(c.get(i).getId());
+                fw.write(" ");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.write(c.get(i).getPsw());
+                fw.write("\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            fw.close();
+            System.out.printf(+i+" users are saved to local database\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void LoadTxtFile (List<User> c) throws RemoteException{
         int j=0;
@@ -67,10 +132,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         try {
             reader = new BufferedReader(new FileReader("Database.txt"));
         } catch (FileNotFoundException e) {
+            System.out.printf("\nError, local database not found!\n");
             e.printStackTrace();
         }
         try {
-
             String line = reader.readLine();
             while (line!=null) {
                 StringTokenizer st = new StringTokenizer(line);
@@ -103,7 +168,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    System.out.printf("Loading successfull "+j+" users from local database!\n");
+    System.out.printf("\nLoading successfull "+j+" new users from local database!\n");
     }
 
     public static void main(String args[]){

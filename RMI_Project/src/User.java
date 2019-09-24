@@ -38,6 +38,10 @@ public class User implements Serializable {
 
     public String getEmail() { return email;}
 
+    public String getSurname() {return surname;}
+
+    public String getCv() {return cv;}
+
     public void setId(String id) { this.id = id; }
 
     public String getPsw() { return psw;}

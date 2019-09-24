@@ -77,6 +77,7 @@ public class Client {
                         }
                         break;
                     case 3:
+                        si.SaveToTxtFile(list);
                         f = false;
                         break;
 
