@@ -2,5 +2,4 @@ Daniel Pispisa danielpispisa@gmail.com OpelAstra 130 Pispis 92
 Pippo Lachina pippolachina@gmail.com FiatPunto 80 Pippo 1234
 Pietro Pisacane pietropisacane@gmail.com Peugeot206 65 Pietro pp
 a a a a a a a
-b b b b b b b
-c c c c c c c
+1 1 1 1 1 1 1

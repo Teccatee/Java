@@ -18,14 +18,16 @@ public class Client {
             ServerInterface si = (ServerInterface) Naming.lookup("rmi://" + address + "/" + servicename);
             Scanner log = new Scanner(System.in);
             List<User> list = si.allUsers();
-            Server server = new Server(list);
+            si.LoadTxtFile(list);
             boolean f = true;
 
             while (f) {
+                list = si.getUserList();
                 title();
                 int choose = log.nextInt();
                 switch (choose) {
                     case 1:
+                        list = si.getUserList();
                         System.out.printf("\n\n\t\tUser ID = ");
                         String id = log.next();
                         String access = si.logIn(id, list);
@@ -36,6 +38,7 @@ public class Client {
                             String psw = log.next();
                             if (access.compareTo(psw) == 0) {
                                 int i[] = si.FindUser(id, list);
+                                list = si.getUserList();
                                 menu(id, list, i[0], si);
                             }
                             else
@@ -72,8 +75,8 @@ public class Client {
                                 String p = log.next();
                                 list.add(new User(n, s, e, v, c, id, p));
                                 si.addUsers(list);
+                                si.setUserList(list);
                                 si.SaveToTxtFile(list);
-                                server.setUserList(list);
                                 break;
                             }
                         }
@@ -87,7 +90,6 @@ public class Client {
                         System.out.println("Error, wrong digit");
                         break;
                 }
-                server.LoadTxtFile(list);
             }
 
         } catch (NotBoundException e) {

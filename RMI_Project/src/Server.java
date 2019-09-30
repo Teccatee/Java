@@ -33,6 +33,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         else
         return "Fail";
     }
+
     @Override
     public int [] FindUser(String b, List<User> d) throws RemoteException {
         int j, k=0;
@@ -67,7 +68,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public void SaveToTxtFile (List <User> c) throws RemoteException {
         int i;
         FileWriter fw = null;
-        System.out.printf("\nUpdating local database..\n");
+        //System.out.printf("\nUpdating local database..\n");
         try {
             fw = new FileWriter("Database.txt", false);
         } catch (IOException e) {
@@ -124,7 +125,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
         try {
             fw.close();
-            System.out.printf(+i+" users are saved to local database\n");
+            //System.out.printf(+i+" users are saved to local database\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -172,7 +173,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    System.out.printf("\nLoading successfull "+j+" new users from local database!\n");
+    //System.out.printf("\nLoading successfull "+j+" new users from local database!\n");
     }
 
     public static void main(String args[]){
@@ -182,17 +183,17 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
             // when testing on remote node, a registry previously located must be used
             Registry registry = LocateRegistry.getRegistry();
-            ServerInterface server = new Server(initializeList());
+            ServerInterface si = new Server(initializeList());
             Server s = new Server(initializeList());
             // when testing on remote node, a registry previously located must be used
             //registry.bind("databaseservice",server);
             // when testing on local:
-            Naming.rebind("databaseservice",server);
+            Naming.rebind("databaseservice",si);
 
             while(true) {
-                Thread.sleep(5000);
-                server.LoadTxtFile(s.userList);
-                server.SaveToTxtFile(s.userList);
+                Thread.sleep(1000);
+                s.LoadTxtFile(s.userList);
+                s.SaveToTxtFile(s.userList);
             }
 
         } catch (RemoteException e) {
