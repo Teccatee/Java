@@ -67,14 +67,14 @@ public class Client {
                                 String s = log.next();
                                 System.out.printf("\n\t\tEmail = ");
                                 String e = log.next();
-                                System.out.printf("\n\t\tVeichle = ");
+                                System.out.printf("\n\t\tVehichle = ");
                                 String v = log.next();
                                 System.out.printf("\n\t\tCV = ");
                                 String c = log.next();
                                 System.out.printf("\n\t\tPassword = ");
                                 String p = log.next();
                                 list.add(new User(n, s, e, v, c, id, p));
-                                si.addUsers(list);
+                                //si.addUsers(list);
                                 si.setUserList(list);
                                 si.SaveToTxtFile(list);
                                 break;
@@ -106,50 +106,63 @@ public class Client {
 
     }
 
-    private static void menu(String id_name, List<User> list, int i, ServerInterface si) {
+    private static void menu(String id_name, List<User> list, int i, ServerInterface si) throws RemoteException {
         Scanner log = new Scanner(System.in);
         int choose=0;
         while (choose!=3){
             System.out.println("\n\n\t\t\tWelcome " +id_name+ "\n\n\t\t" +
                     "1) Edit Account\n\t\t" +
                     "2) All Users\n\t\t" +
-                    "3) Log out");
+                    "3) Log out\n\t\t" +
+                    "4) Delete Account");
             choose = log.nextInt();
             switch (choose) {
 
                 case 1:
                     System.out.printf(list.get(i).toString());
-                    System.out.println("\n\tWhat do you want to edit?\n\1) Name\n2) Password\n3) Email\n4) Vehicle\n" +
+                    System.out.println("\n\tWhat do you want to edit?\n1) Name\n2) Password\n3) Email\n4) Vehicle\n" +
                             "5) Cv");
                     String a;
+                    choose = log.nextInt();
                     switch (choose) {
                         case 1:
                             System.out.printf("New Name: ");
                             a = log.next();
                             list.get(i).setName(a);
+                            si.setUserList(list);
+                            si.SaveToTxtFile(list);
                             break;
                         case 2:
                             System.out.println("New password");
                             a = log.next();
                             list.get(i).setPsw(a);
+                            si.setUserList(list);
+                            si.SaveToTxtFile(list);
                             break;
                         case 3:
                             System.out.printf("New Email: ");
                             a = log.next();
                             list.get(i).setEmail(a);
+                            si.setUserList(list);
+                            si.SaveToTxtFile(list);
                             break;
                         case 4:
                             System.out.printf("New Vehicle: ");
                             a = log.next();
                             list.get(i).setVehicle(a);
+                            si.setUserList(list);
+                            si.SaveToTxtFile(list);
                             break;
                         case 5:
                             System.out.printf("New Cv: ");
                             a = log.next();
                             list.get(i).setCv(a);
+                            si.setUserList(list);
+                            si.SaveToTxtFile(list);
                             break;
-                            default:
-                                break;
+
+                        default:
+                            break;
                     }
                     try {
                         si.SaveToTxtFile(list);
@@ -163,6 +176,14 @@ public class Client {
                     break;
 
                 case 3:
+                    break;
+
+                case 4:
+                    list.remove(i);
+                    //si.addUsers(list);
+                    si.setUserList(list);
+                    si.SaveToTxtFile(list);
+                    choose = 3;
                     break;
 
                 default:

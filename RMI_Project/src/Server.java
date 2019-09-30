@@ -56,7 +56,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         this.userList = new_list;
     }
 
-
     private static List<User> initializeList() {
         List<User> list = new ArrayList<>();
         list.add(new User("Daniel", "Pispisa", "danielpispisa@gmail.com", "OpelAstra", "130", "Pispis", "92"));
