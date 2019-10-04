@@ -19,7 +19,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public List<User> getUserList() { return userList; }
     public List<User> setUserList(List<User> a) { return userList = a; }
 
-
     public Server(List<User> list) throws RemoteException {
         super();
         this.userList = list;
@@ -35,7 +34,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public int [] FindUser(String b, List<User> d) throws RemoteException {
+    public int[] FindUser(String b, List<User> d) throws RemoteException {
         int j, k=0;
         for (j = 0; j < d.size(); j++) {
             if (d.get(j).getId().compareTo(b) == 0) {
@@ -67,9 +66,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
     private static List<User> initializeList() {
         List<User> list = new ArrayList<>();
-        //list.add(new User("Daniel", "Pispisa", "danielpispisa@gmail.com", "OpelAstra", "130", "Pispis", "92"));
-        //list.add(new User("Pippo", "Lachina", "pippolachina@gmail.com", "FiatPunto", "80", "Pippo", "1234"));
-        //list.add(new User("Pietro", "Pisacane", "pietropisacane@gmail.com", "Peugeot206", "65", "Pietro", "pp"));
         return list;
     }
 
@@ -187,27 +183,14 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
         try {
             System.setProperty("java.rmi.server.hostname","localhost");
-
-            // when testing on remote node, a registry previously located must be used
             Registry registry = LocateRegistry.getRegistry();
             ServerInterface si = new Server(initializeList());
-            // when testing on remote node, a registry previously located must be used
-            //registry.bind("databaseservice",server);
-            // when testing on local:
             Naming.rebind("databaseservice",si);
-
 
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        //} catch (InterruptedException e) {
-          //  e.printStackTrace();
         }
-        /*
-        catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        */
     }
 }

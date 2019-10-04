@@ -167,7 +167,6 @@ public class Client {
                             si.setUserList(list);
                             si.SaveToTxtFile(list);
                             break;
-
                         default:
                             break;
                     }
