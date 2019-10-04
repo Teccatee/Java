@@ -30,19 +30,19 @@ public class User implements Serializable {
         return name;
     }
 
-    public String getId() { return id;}
+    public String getId() { return id; }
 
     public String getVehicle() { return vehicle; }
 
-    public String getEmail() { return email;}
+    public String getEmail() { return email; }
 
-    public String getSurname() {return surname;}
+    public String getSurname() { return surname; }
 
-    public String getCv() {return cv;}
+    public String getCv() { return cv; }
+
+    public String getPsw() { return psw; }
 
     public void setId(String id) { this.id = id; }
-
-    public String getPsw() { return psw;}
 
     public void setPsw(String psw) { this.psw = psw; }
 
@@ -53,6 +53,8 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setSurname(String surname) { this.surname = surname; }
 
     public void setCv(String cv) { this.cv = cv;}
 

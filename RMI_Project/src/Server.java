@@ -52,15 +52,24 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public void addUsers(List<User> new_list) throws RemoteException {
-        this.userList = new_list;
+    public void addUsers(List<User> new_list, String n, String s, String e, String v, String c, String id, String p) throws RemoteException {
+        new_list.add(new User(n, s, e, v, c, id, p));
+        setUserList(new_list);
+        SaveToTxtFile(new_list);
+    }
+
+    @Override
+    public void removeUser(List<User> new_list, int i) throws RemoteException  {
+        new_list.remove(i);
+        setUserList(new_list);
+        SaveToTxtFile(new_list);
     }
 
     private static List<User> initializeList() {
         List<User> list = new ArrayList<>();
-        list.add(new User("Daniel", "Pispisa", "danielpispisa@gmail.com", "OpelAstra", "130", "Pispis", "92"));
-        list.add(new User("Pippo", "Lachina", "pippolachina@gmail.com", "FiatPunto", "80", "Pippo", "1234"));
-        list.add(new User("Pietro", "Pisacane", "pietropisacane@gmail.com", "Peugeot206", "65", "Pietro", "pp"));
+        //list.add(new User("Daniel", "Pispisa", "danielpispisa@gmail.com", "OpelAstra", "130", "Pispis", "92"));
+        //list.add(new User("Pippo", "Lachina", "pippolachina@gmail.com", "FiatPunto", "80", "Pippo", "1234"));
+        //list.add(new User("Pietro", "Pisacane", "pietropisacane@gmail.com", "Peugeot206", "65", "Pietro", "pp"));
         return list;
     }
 
@@ -158,8 +167,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                         break;
                     }
                     else {
-                        c.add(new User(n, s, e, v, cv, id, p));
-                        addUsers(c);
+                        addUsers(c, n, s, e, v, cv, id, p);
                     }
                 }
             line = reader.readLine();
@@ -183,24 +191,18 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             // when testing on remote node, a registry previously located must be used
             Registry registry = LocateRegistry.getRegistry();
             ServerInterface si = new Server(initializeList());
-            Server s = new Server(initializeList());
             // when testing on remote node, a registry previously located must be used
             //registry.bind("databaseservice",server);
             // when testing on local:
             Naming.rebind("databaseservice",si);
 
-            while(true) {
-                Thread.sleep(1000);
-                s.LoadTxtFile(s.userList);
-                s.SaveToTxtFile(s.userList);
-            }
 
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        //} catch (InterruptedException e) {
+          //  e.printStackTrace();
         }
         /*
         catch (MalformedURLException e) {
