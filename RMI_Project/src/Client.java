@@ -17,8 +17,7 @@ public class Client {
         try {
             ServerInterface si = (ServerInterface) Naming.lookup("rmi://" + address + "/" + servicename);
             Scanner log = new Scanner(System.in);
-            List<User> list = si.allUsers();
-            si.LoadTxtFile(list);
+            List<User> list;
             boolean f = true;
 
             while (f) {
@@ -79,7 +78,6 @@ public class Client {
                         }
                         break;
                     case 3:
-                        si.SaveToTxtFile(list);
                         f = false;
                         break;
 
@@ -130,50 +128,39 @@ public class Client {
                             a = log.next();
                             list.get(i).setName(a);
                             si.setUserList(list);
-                            si.SaveToTxtFile(list);
                             break;
                         case 2:
                             System.out.printf("\t\tNew Surname: ");
                             a = log.next();
                             list.get(i).setSurname(a);
                             si.setUserList(list);
-                            si.SaveToTxtFile(list);
                             break;
                         case 3:
                             System.out.printf("\t\tNew password: ");
                             a = log.next();
                             list.get(i).setPsw(a);
                             si.setUserList(list);
-                            si.SaveToTxtFile(list);
                             break;
                         case 4:
                             System.out.printf("\t\tNew Email: ");
                             a = log.next();
                             list.get(i).setEmail(a);
                             si.setUserList(list);
-                            si.SaveToTxtFile(list);
                             break;
                         case 5:
                             System.out.printf("\t\tNew Vehicle: ");
                             a = log.next();
                             list.get(i).setVehicle(a);
                             si.setUserList(list);
-                            si.SaveToTxtFile(list);
                             break;
                         case 6:
                             System.out.printf("\t\tNew Cv: ");
                             a = log.next();
                             list.get(i).setCv(a);
                             si.setUserList(list);
-                            si.SaveToTxtFile(list);
                             break;
                         default:
                             break;
-                    }
-                    try {
-                        si.SaveToTxtFile(list);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
                     }
                     break;
 

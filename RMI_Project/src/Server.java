@@ -14,10 +14,16 @@ import java.util.StringTokenizer;
 
 public class Server extends UnicastRemoteObject implements ServerInterface {
 
-    private List<User> userList;
+    private static List<User> userList;
 
     public List<User> getUserList() { return userList; }
-    public List<User> setUserList(List<User> a) { return userList = a; }
+    public void setUserList(List<User> a) {
+        userList = a;
+        SaveToTxtFile(userList);}
+
+    public Server() throws RemoteException {
+        super();
+    }
 
     public Server(List<User> list) throws RemoteException {
         super();
@@ -69,7 +75,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return list;
     }
 
-    public void SaveToTxtFile (List <User> c) throws RemoteException {
+    public void SaveToTxtFile (List <User> c) {
         int i;
         FileWriter fw = null;
         //System.out.printf("\nUpdating local database..\n");
@@ -135,7 +141,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
     }
 
-    public void LoadTxtFile (List<User> c) throws RemoteException{
+    public void LoadTxtFile (List<User> c) {
         int j=0;
         BufferedReader reader = null;
         try {
@@ -186,7 +192,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             Registry registry = LocateRegistry.getRegistry();
             ServerInterface si = new Server(initializeList());
             Naming.rebind("databaseservice",si);
-
+            Server server = new Server();
+            server.LoadTxtFile(userList);
+            System.out.println("Server Aggiornato...");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
