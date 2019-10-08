@@ -135,7 +135,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
         try {
             fw.close();
-            //System.out.printf(+i+" users are saved to local database\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

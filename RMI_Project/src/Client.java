@@ -1,3 +1,7 @@
+import com.google.zxing.WriterException;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -78,6 +82,15 @@ public class Client {
                         }
                         break;
                     case 3:
+                        File file = new File("./QRcode/MyQRCodePispis.png");
+                        decodeQRCode dec = new decodeQRCode();
+                        try {
+                           String ds = dec.decodeQRCode(file);
+                           System.out.println(ds);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    case 4:
                         f = false;
                         break;
 
@@ -97,7 +110,7 @@ public class Client {
     }
 
     private static void title() {
-        System.out.println("\n\t\tWELCOME\n\n\t\t1) Log in\n\t\t2) Create an account\n\t\t3) Exit");
+        System.out.println("\n\t\tWELCOME\n\n\t\t1) Log in\n\t\t2) Create an account\n\t\t3) Read QR_Code\n\t\t4) Exit");
 
     }
 
@@ -110,7 +123,8 @@ public class Client {
                     "1) Edit Account\n\t\t" +
                     "2) All Users\n\t\t" +
                     "3) Delete Account\n\t\t" +
-                    "4) Log out");
+                    "4) Get QR_CODE\n\t\t"+
+                    "5) Log out");
 
             choose = log.nextInt();
             switch (choose) {
@@ -174,6 +188,17 @@ public class Client {
                     break;
 
                 case 4:
+                    try {
+                        QRCodeGenerator QR = new QRCodeGenerator();
+                        QR.generateQRCodeImage(list.get(i).getId()+list.get(i).getVehicle(), 350, 350, "./QRcode/MyQRCode"+list.get(i).getId()+".png");
+                    } catch (WriterException e) {
+                        System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
+                    } catch (IOException e) {
+                        System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
+                    }
+
+
+                case 5:
                     flag = false;
                     break;
 
