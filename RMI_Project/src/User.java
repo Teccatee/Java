@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class User implements Serializable {
-    private static List<Vehicle> vehicles;
+    private static List<Vehicle> vehicles = new ArrayList<>();
     private static final long serialVersionUID = -3253167843904900446L;
     private String id;
     private String psw;
@@ -24,17 +24,12 @@ public class User implements Serializable {
         this.cv = c;
         this.id = i;
         this.psw = p;
-        initializelist();
     }
 
     public List<Vehicle> getvehicles() {return vehicles;}
 
     public void setVehicles(List<Vehicle> a) {
         vehicles=a;
-    }
-
-    private static void initializelist() {
-        List<Vehicle> vehicles = new ArrayList<>();
     }
 
     public void addVehicle() {
@@ -49,7 +44,7 @@ public class User implements Serializable {
         String h=p.next();
         System.out.printf("\nEnter displacement: ");
         String d=p.next();
-        vehicles.add(new Vehicle(t, h, lp, d, b));
+        this.vehicles.add(new Vehicle(t, h, lp, d, b));
     }
 
     @Override

@@ -190,6 +190,8 @@ public class Client {
 
                 case 2:
                     list.get(i).addVehicle();
+                    System.out.printf(list.get(i).getvehicles().toString());
+
                     break;
 
                 case 3:
