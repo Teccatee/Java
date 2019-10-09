@@ -81,15 +81,24 @@ public class Client {
                             }
                         }
                         break;
+
                     case 3:
-                        File file = new File("./QRcode/MyQRCodePispis.png");
+                        System.out.print("Enter the file ID: ");
+                        String s=log.next();
+                        File file = new File("./QRcode/MyQRCode"+s+".png");
                         decodeQRCode dec = new decodeQRCode();
                         try {
-                           String ds = dec.decodeQRCode(file);
-                           System.out.println(ds);
+                           String vecId = dec.decodeQRCode(file);
+                           int k[]=si.FindQRcode(vecId);
+                           if(k[1]==0)
+                               System.out.println("\nError, user not found");
+                           else
+                               System.out.println(list.get(k[0]).toString());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        break;
+
                     case 4:
                         f = false;
                         break;
@@ -121,10 +130,11 @@ public class Client {
         while (flag){
             System.out.println("\n\n\t\t\tWelcome " +id_name+ "\n\n\t\t" +
                     "1) Edit Account\n\t\t" +
-                    "2) All Users\n\t\t" +
-                    "3) Delete Account\n\t\t" +
-                    "4) Get QR_CODE\n\t\t"+
-                    "5) Log out");
+                    "2) Add Vehicle\n\t\t"+
+                    "3) All Users\n\t\t" +
+                    "4) Delete Account\n\t\t" +
+                    "5) Get QR_CODE\n\t\t"+
+                    "6) Log out");
 
             choose = log.nextInt();
             switch (choose) {
@@ -179,15 +189,19 @@ public class Client {
                     break;
 
                 case 2:
-                    System.out.println(list);
+                    list.get(i).addVehicle();
                     break;
 
                 case 3:
+                    System.out.println(list);
+                    break;
+
+                case 4:
                     si.removeUser(list, i);
                     flag = false;
                     break;
 
-                case 4:
+                case 5:
                     try {
                         QRCodeGenerator QR = new QRCodeGenerator();
                         QR.generateQRCodeImage(list.get(i).getId()+list.get(i).getVehicle(), 350, 350, "./QRcode/MyQRCode"+list.get(i).getId()+".png");
@@ -196,9 +210,9 @@ public class Client {
                     } catch (IOException e) {
                         System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
                     }
+                    break;
 
-
-                case 5:
+                case 6:
                     flag = false;
                     break;
 

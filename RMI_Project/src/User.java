@@ -1,6 +1,11 @@
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 
 public class User implements Serializable {
+    private static List<Vehicle> vehicles;
     private static final long serialVersionUID = -3253167843904900446L;
     private String id;
     private String psw;
@@ -19,6 +24,32 @@ public class User implements Serializable {
         this.cv = c;
         this.id = i;
         this.psw = p;
+        initializelist();
+    }
+
+    public List<Vehicle> getvehicles() {return vehicles;}
+
+    public void setVehicles(List<Vehicle> a) {
+        vehicles=a;
+    }
+
+    private static void initializelist() {
+        List<Vehicle> vehicles = new ArrayList<>();
+    }
+
+    public void addVehicle() {
+        Scanner p = new Scanner(System.in);
+        System.out.printf("Enter brand: ");
+        String b=p.next();
+        System.out.printf("\nEnter type: ");
+        String t=p.next();
+        System.out.printf("\nEnter license plate: ");
+        String lp=p.next();
+        System.out.printf("\nEnter hp: ");
+        String h=p.next();
+        System.out.printf("\nEnter displacement: ");
+        String d=p.next();
+        vehicles.add(new Vehicle(t, h, lp, d, b));
     }
 
     @Override

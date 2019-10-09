@@ -51,6 +51,19 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return new int[]{j, k};
     }
 
+    public int[] FindQRcode (String vecId) throws RemoteException {
+        int j, k=0;
+        String p;
+        for(j=0; j<userList.size(); j++) {
+            p=userList.get(j).getId()+userList.get(j).getVehicle();
+            if(p.compareTo(vecId)==0){
+                k=1;
+                break;
+            }
+        }
+        return  new int[]{j,k};
+    }
+
     @Override
     public List<User> allUsers() throws RemoteException {
         return userList;
