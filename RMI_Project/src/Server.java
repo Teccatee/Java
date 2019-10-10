@@ -1,7 +1,5 @@
-import javax.swing.plaf.ListUI;
 import java.io.*;
 import java.net.MalformedURLException;
-import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -9,7 +7,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Server extends UnicastRemoteObject implements ServerInterface {
@@ -38,6 +35,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         else
         return "Fail";
     }
+
+
 
     @Override
     public int[] FindUser(String b, List<User> d) throws RemoteException {

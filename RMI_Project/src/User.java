@@ -28,10 +28,26 @@ public class User implements Serializable {
 
     public List<Vehicle> getvehicles() {return vehicles;}
 
-    public void setVehicles(List<Vehicle> a) {
-        vehicles=a;
+    public int [] FindVehicle (String f, int i) {
+        int k = 0;
+        for(; i<vehicles.size(); i++) {
+            if (vehicles.get(i).getBrand().compareTo(f) == 0) {
+                k = 1;
+                break;
+            }
+        }
+        return new int[] {i, k};
     }
 
+    public int [] FindLicensePlate(String f) {
+        int k =0, i;
+        for (i=0; i<vehicles.size(); i++)
+            if (vehicles.get(i).getLicensePlate().compareTo(f)==0) {
+                k = 1;
+                break;
+            }
+        return new int[] {i, k};
+    }
     public void addVehicle() {
         Scanner p = new Scanner(System.in);
         System.out.printf("Enter brand: ");
@@ -44,9 +60,12 @@ public class User implements Serializable {
         String h=p.next();
         System.out.printf("\nEnter displacement: ");
         String d=p.next();
-        this.vehicles.add(new Vehicle(t, h, lp, d, b));
+        vehicles.add(new Vehicle(t, h, lp, d, b));
     }
 
+    public void RemoveVehicle (){
+        
+    }
     @Override
     public String toString() {
         return "\n\n\t\t" + name + "\n\t\t" + surname + "\n\t\t" + email + "\n\t\t" + vehicle + "\n\t\t" + cv;

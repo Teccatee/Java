@@ -131,10 +131,14 @@ public class Client {
             System.out.println("\n\n\t\t\tWelcome " +id_name+ "\n\n\t\t" +
                     "1) Edit Account\n\t\t" +
                     "2) Add Vehicle\n\t\t"+
-                    "3) All Users\n\t\t" +
-                    "4) Delete Account\n\t\t" +
-                    "5) Get QR_CODE\n\t\t"+
-                    "6) Log out");
+                    "3) Remove Vehicle\n\t\t"+
+                    "4) Find car in database\n\t\t"+
+                    "5) View your vehicles\n\t\t" +
+                    "6) All Users\n\t\t" +
+                    "7) Find User in database\n\t\t"+
+                    "8) Delete Account\n\t\t" +
+                    "9) Get QR_CODE\n\t\t"+
+                    "10) Log out");
 
             choose = log.nextInt();
             switch (choose) {
@@ -190,20 +194,60 @@ public class Client {
 
                 case 2:
                     list.get(i).addVehicle();
-                    System.out.printf(list.get(i).getvehicles().toString());
-
                     break;
 
                 case 3:
-                    System.out.println(list);
+                    System.out.printf(list.get(i).getvehicles().toString()+"\n\n\nWhich vehicle do you want to remove?\nEnter license plate: ");
+                    String s=log.next();
+                    int k[]=list.get(i).FindLicensePlate(s);
+                    if (k[1]==0)
+                        System.out.println("Vehicle not registered!");
+                    else {
+                        list.get(i).getvehicles().remove(k[0]);
+                        System.out.println("Vehicle removed successfull!");
+                    }
                     break;
 
                 case 4:
+                    System.out.println("Enter vehicle brand: ");
+                    String f= log.next();
+                    int j;
+                    k = list.get(0).FindVehicle(f, 0);
+                    for (j=0; j<list.size(); j++) {
+                        if (k[1] == 1) {
+                            System.out.println(list.get(j).getvehicles().get(k[0]).toString() + "\tVehicle registered to: " + list.get(j).getId());
+                        }
+                        if (k[0] < list.get(j).getvehicles().size()) {
+                            k = list.get(j).FindVehicle(f, k[0] + 1);
+                            j--;
+                        }
+                    }
+                    break;
+
+                case 5:
+                    System.out.printf(list.get(i).getvehicles().toString());
+                    break;
+
+                case 6:
+                   System.out.println(list);
+                   break;
+
+                case 7:
+                    System.out.println("Enter UserID: ");
+                    s=log.next();
+                    k=si.FindUser(s, list);
+                    if (k[1]==1)
+                        System.out.println(list.get(k[0]).toString()+list.get(k[0]).getvehicles().toString());
+                    else
+                        System.out.println("User not found!");
+                    break;
+
+                case 8:
                     si.removeUser(list, i);
                     flag = false;
                     break;
 
-                case 5:
+                case 9:
                     try {
                         QRCodeGenerator QR = new QRCodeGenerator();
                         QR.generateQRCodeImage(list.get(i).getId()+list.get(i).getVehicle(), 350, 350, "./QRcode/MyQRCode"+list.get(i).getId()+".png");
@@ -214,14 +258,15 @@ public class Client {
                     }
                     break;
 
-                case 6:
+                case 10:
                     flag = false;
                     break;
 
                 default:
                     System.out.println("\n\t\tError, wrong digit");
                     break;
+                }
             }
         }
     }
-}
+
