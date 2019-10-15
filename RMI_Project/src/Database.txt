@@ -1,3 +1,3 @@
-Daniel Pispisa danielpispisa@gmail.com OpelAstra 130 Pispis 92
-Pippo Lachina pippolachina@gmail.com FiatPunto 80 Pippo 1234
-Pietro Pisacane pietropisacane@gmail.com Peugeot206 65 Pietro pp
+Daniel Pispisa danielpispisa@gmail.com OpelAstra 130 Pispis 92 Seat_cordoba auto 75 AL997YG 1400 ducati moto 200cv rf867kk 900 
+3 3 3 3 3 3 3 BRAND1 TYPE1 CV1 LICENSE1 1600 BRAND2 TYPE2 CV2 LICENSE2 1600 BRAND3 TYPE3 CV3 LICENSE3 1600 BRAND4 TYPE4 CV4 LICENSE4 1600 
+5 5 5 5 5 5 5 

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class User implements Serializable {
-    private static List<Vehicle> vehicles = new ArrayList<>();
+    public List<Vehicle> vehicles;
     private static final long serialVersionUID = -3253167843904900446L;
     private String id;
     private String psw;
@@ -24,9 +24,14 @@ public class User implements Serializable {
         this.cv = c;
         this.id = i;
         this.psw = p;
+        this.vehicles =  new ArrayList<>();
     }
 
     public List<Vehicle> getvehicles() {return vehicles;}
+
+    public void setvehicles(List<Vehicle> a) {
+        this.vehicles=a;
+    }
 
     public int [] FindVehicle (String f, int i) {
         int k = 0;
@@ -60,12 +65,13 @@ public class User implements Serializable {
         String h=p.next();
         System.out.printf("\nEnter displacement: ");
         String d=p.next();
-        vehicles.add(new Vehicle(t, h, lp, d, b));
+        add(t, h, lp, d, b);
     }
 
-    public void RemoveVehicle (){
-        
+    public void add(String t, String h, String lp, String d, String b) {
+        this.vehicles.add(new Vehicle(t, h, lp, d, b));
     }
+
     @Override
     public String toString() {
         return "\n\n\t\t" + name + "\n\t\t" + surname + "\n\t\t" + email + "\n\t\t" + vehicle + "\n\t\t" + cv;
