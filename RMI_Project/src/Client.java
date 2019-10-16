@@ -200,16 +200,18 @@ public class Client {
                 case 4:
                     System.out.println("Enter vehicle brand: ");
                     String f= log.next();
-                    int j;
                     k = list.get(0).FindVehicle(f, 0);
-                    for (j=0; j<list.size(); j++) {
+                    for (int j=0; j<list.size(); j++) {
+                        System.out.println("indice user: "+  k[0]+1);
                         if (k[1] == 1) {
-                            System.out.println(list.get(j).getvehicles().get(k[0]).toString() + "\tVehicle registered to: " + list.get(j).getId());
+                            System.out.println(list.get(j).getvehicles().get(k[0]).toString() +"Vehicle registered to: " + list.get(j).getId());
                         }
                         if (k[0] < list.get(j).getvehicles().size()) {
                             k = list.get(j).FindVehicle(f, k[0] + 1);
                             j--;
                         }
+                        else
+                            k = list.get(j).FindVehicle(f, 0);
                     }
                     break;
 
