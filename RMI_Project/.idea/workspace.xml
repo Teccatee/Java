@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="389de4c4-0428-4b87-8bfa-09a2803a5240" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerInterface.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -281,8 +278,18 @@
       <option name="project" value="LOCAL" />
       <updated>1571250518900</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="************Version 1.1**************&#10;***********FINAL**RELASE*************&#10;*          -Clear Code              *  &#10;*     -Optimized toString           *&#10;*     -Optimized Find User          *&#10;*     -Optimized Remove User        *&#10;* -Optimized Save&amp;Write to local    *&#10;*-Updating Client list before search*&#10;*                                   *&#10;*************************************">
+      <created>1571253596761</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1571253596761</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -313,6 +320,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Prova" />
@@ -332,6 +340,10 @@
     <MESSAGE value="Add QRcode Generator&#10;add QRcode Reader&#10;class vehicle added" />
     <MESSAGE value="add Vehicle list for each User&#10;optimized write/load on localdatabase" />
     <MESSAGE value="Vers. 1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Vers. 1.0" />
+    <MESSAGE value="************Version 1.1**************&#10;***********FINAL**RELASE*************&#10;*          -Clear Code              *  &#10;*     -Optimized toString           *&#10;*     -Optimized Find User          *&#10;*     -Optimized Remove User        *&#10;* -Optimized Save&amp;Write to local    *&#10;*-Updating Client list before search*&#10;*                                   *&#10;*************************************" />
+    <option name="LAST_COMMIT_MESSAGE" value="************Version 1.1**************&#10;***********FINAL**RELASE*************&#10;*          -Clear Code              *  &#10;*     -Optimized toString           *&#10;*     -Optimized Find User          *&#10;*     -Optimized Remove User        *&#10;* -Optimized Save&amp;Write to local    *&#10;*-Updating Client list before search*&#10;*                                   *&#10;*************************************" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

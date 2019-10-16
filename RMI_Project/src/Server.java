@@ -5,9 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Server extends UnicastRemoteObject implements ServerInterface {
 
@@ -33,7 +31,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             Naming.rebind("databaseservice", si);
             Server server = new Server();
             server.LoadTxtFile();
-            System.out.println("Server Aggiornato...");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -44,15 +41,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public void setUserList(List<User> a) {
         userList = a;
         SaveToTxtFile();
-    }
-
-    @Override
-    public String logIn(String a) throws RemoteException {
-        int[] result = FindUser(a);
-        if(result[1]==1)
-            return userList.get(result[0]).getPsw();
-        else
-        return "Fail";
     }
 
     public int[] FindQRcode (String vecId) throws RemoteException {
@@ -69,6 +57,15 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
+    public String logIn(String a) throws RemoteException {
+        int[] result = FindUser(a);
+        if (result[1] == 1)
+            return userList.get(result[0]).getPsw();
+        else
+            return "Fail";
+    }
+
+    @Override
     public int[] FindUser(String b) throws RemoteException {
         List<User> d = userList;
         int j, k = 0;
@@ -81,16 +78,16 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return new int[]{j, k};
     }
 
+    private static List<User> initializeList() {
+        List<User> list = new ArrayList<>();
+        return list;
+    }
+
     @Override
     public void addUsers(String n, String s, String e, String id, String p, boolean f) throws RemoteException {
         userList.add(new User(n, s, e, id, p));
         if (f==true)
             SaveToTxtFile();
-    }
-
-    private static List<User> initializeList() {
-        List<User> list = new ArrayList<>();
-        return list;
     }
 
     @Override
@@ -100,10 +97,25 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     public void SaveToTxtFile() {
+        Calendar calendar = new GregorianCalendar();
+        String AMPM;
+        int time = calendar.get(Calendar.HOUR);
+        int min = calendar.get(Calendar.MINUTE);
+        int sec = calendar.get(Calendar.SECOND);
+        if (calendar.get(Calendar.AM_PM) == 0)
+            AMPM = "A.M.";
+        else
+            AMPM = "P.M.";
+        String Time = (+time + ":" + min + ":" + sec + " " + AMPM);
+        int d = calendar.get(Calendar.DAY_OF_MONTH);
+        int m = calendar.get(Calendar.MONTH);
+        int y = calendar.get(Calendar.YEAR);
+        String date = ("\t" + d + "-" + (m + 1) + "-" + y);
         List<User> c = userList;
         FileWriter fw = null;
         try {
             fw = new FileWriter("Database.txt", false);
+            fw.write("Last update at: " + Time + date + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,6 +144,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             }
         }
         try {
+            System.out.println("\n\n\t\tDatabase update at: " + Time);
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -150,6 +163,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
         try {
             String line = reader.readLine();
+            line = reader.readLine();
             while (line!=null) {
                 StringTokenizer st = new StringTokenizer(line);
                     String n= (String) st.nextElement();
