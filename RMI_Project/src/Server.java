@@ -14,6 +14,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     private static List<User> userList;
 
     public List<User> getUserList() { return userList; }
+
     public void setUserList(List<User> a) {
         userList = a;
         SaveToTxtFile(userList);
@@ -37,8 +38,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return "Fail";
     }
 
-
-
     @Override
     public int[] FindUser(String b, List<User> d) throws RemoteException {
         int j, k=0;
@@ -55,7 +54,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         int j, k=0;
         String p;
         for(j=0; j<userList.size(); j++) {
-            p=userList.get(j).getId()+userList.get(j).getVehicle();
+            p=userList.get(j).getId()+userList.get(j).getvehicles().toString();
             if(p.compareTo(vecId)==0){
                 k=1;
                 break;
@@ -70,10 +69,10 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public void addUsers(List<User> new_list, String n, String s, String e, String v, String c, String id, String p) throws RemoteException {
-        this.userList.add(new User(n, s, e, v, c, id, p));
-        //setUserList(new_list);
-        SaveToTxtFile(new_list);
+    public void addUsers(List<User> new_list, String n, String s, String e, String id, String p, boolean f) throws RemoteException {
+        this.userList.add(new User(n, s, e, id, p));
+        if (f==true)
+         SaveToTxtFile(userList);
     }
 
     @Override
@@ -89,31 +88,25 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     public void SaveToTxtFile (List <User> c) {
-        int i;
+        c = getUserList();
         FileWriter fw = null;
-        //System.out.printf("\nUpdating local database..\n");
         try {
             fw = new FileWriter("Database.txt", false);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (i=0; i < c.size(); i++) {
-            String buildUs = c.get(i).getName()+" "+c.get(i).getSurname()+" "+c.get(i).getEmail()+" "+c.get(i).getVehicle()+" "+c.get(i).getCv()+" "+c.get(i).getId()+" "+c.get(i).getPsw()+" ";
-            String buildVe;
+        for (int i=0; i < c.size(); i++) {
             try {
-                System.out.println("User: "+buildUs+"i: "+i);
-                fw.write(buildUs);
+                fw.write(c.get(i).StringToFile());
+                fw.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             if (!c.get(i).getvehicles().isEmpty()) {
-                System.out.println("Salvo i veicoli");
                 for (int j = 0; j < c.get(i).getvehicles().size(); j++) {
-                    buildVe = c.get(i).getvehicles().get(j).getBrand() + " " + c.get(i).getvehicles().get(j).getType() + " " + c.get(i).getvehicles().get(j).getHp() + " " + c.get(i).getvehicles().get(j).getLicensePlate() + " " + c.get(i).getvehicles().get(j).getDisplacement()+" ";
-
                     try {
-                        System.out.println("Vehicle: "+buildVe+"j: "+j);
-                        fw.write(buildVe);
+                        fw.write(c.get(i).getvehicles().get(j).StringToFile());
+                        fw.flush();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -125,11 +118,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            /*try {
-                fw.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
         try {
             fw.close();
@@ -154,8 +142,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                     String n= (String) st.nextElement();
                     String s= (String) st.nextElement();
                     String e= (String) st.nextElement();
-                    String v= (String) st.nextElement();
-                    String cv= (String) st.nextElement();
                     String id= (String) st.nextElement();
                     String p= (String) st.nextElement();
                     int i[]=FindUser(id, c);
@@ -165,7 +151,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                         break;
                     }
                     else {
-                        addUsers(c, n, s, e, v, cv, id, p);
+                        addUsers(c, n, s, e, id, p, false);
                         i = FindUser(id, c);
                         List <Vehicle> new_VehicleList = getUserList().get(i[0]).getvehicles();
                         while (st.hasMoreElements()) {
@@ -177,7 +163,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                             new_VehicleList.add(new Vehicle(type, hp, license, disp, brand));
                             userList.get(i[0]).setvehicles(new_VehicleList);
                        }
-                  //      System.out.println("Veicoli utente" + userList.get(i[0]).getId()+" "+userList.get(i[0]).getvehicles().toString());
                     }
 
             line = reader.readLine();
@@ -186,11 +171,11 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             e.printStackTrace();
         }
         try {
+          SaveToTxtFile(userList);
           reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    //System.out.printf("\nLoading successfull "+j+" new users from local database!\n");
     }
 
     public static void main(String args[]){
@@ -202,8 +187,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             Naming.rebind("databaseservice",si);
             Server server = new Server();
             server.LoadTxtFile(userList);
-            int i=1;
-         //   System.out.println("User: "+userList.get(1).getId()+ " Vehicles: "+userList.get(1).getvehicles().toString());
             System.out.println("Server Aggiornato...");
         } catch (RemoteException e) {
             e.printStackTrace();

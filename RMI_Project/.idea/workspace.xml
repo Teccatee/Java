@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="389de4c4-0428-4b87-8bfa-09a2803a5240" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/QRcode/MyQRCodePispis.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/QRcode/MyQRCodePispis.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Vehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vehicle.class" afterDir="false" />
@@ -61,6 +66,20 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="RMI_Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -241,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570638294437</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add Vehicle list for each User&#10;optimized write/load on localdatabase">
+      <created>1571165782722</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1571165782723</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,6 +316,18 @@
     <MESSAGE value="Optimization save and load data." />
     <MESSAGE value="Add QRcode Generator&#10;add QRcode Reader" />
     <MESSAGE value="Add QRcode Generator&#10;add QRcode Reader&#10;class vehicle added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add QRcode Generator&#10;add QRcode Reader&#10;class vehicle added" />
+    <MESSAGE value="add Vehicle list for each User&#10;optimized write/load on localdatabase" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Vehicle list for each User&#10;optimized write/load on localdatabase" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Client.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

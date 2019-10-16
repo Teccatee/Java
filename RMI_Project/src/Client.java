@@ -76,7 +76,7 @@ public class Client {
                                 String c = log.next();
                                 System.out.printf("\n\t\tPassword = ");
                                 String p = log.next();
-                                si.addUsers(list, n, s, e, v, c, id, p);
+                                si.addUsers(list, n, s, e, id, p, true);
                                 break;
                             }
                         }
@@ -93,7 +93,7 @@ public class Client {
                            if(k[1]==0)
                                System.out.println("\nError, user not found");
                            else
-                               System.out.println(list.get(k[0]).toString());
+                               System.out.println(list.get(k[0]).toString()+list.get(k[0]).getvehicles().toString());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -146,8 +146,7 @@ public class Client {
                 case 1:
                     System.out.printf(list.get(i).toString());
                     System.out.println("\n\tWhat do you want to edit?\n\t\t1) Name\n\t\t2) Surname\n\t\t3) Password\n\t\t" +
-                            "4) Email\n" +
-                            "\t\t5) Vehicle\n\t\t6) Cv");
+                            "4) Email");
                     String a;
                     choose = log.nextInt();
                     switch (choose) {
@@ -175,18 +174,6 @@ public class Client {
                             list.get(i).setEmail(a);
                             si.setUserList(list);
                             break;
-                        case 5:
-                            System.out.printf("\t\tNew Vehicle: ");
-                            a = log.next();
-                            list.get(i).setVehicle(a);
-                            si.setUserList(list);
-                            break;
-                        case 6:
-                            System.out.printf("\t\tNew Cv: ");
-                            a = log.next();
-                            list.get(i).setCv(a);
-                            si.setUserList(list);
-                            break;
                         default:
                             break;
                     }
@@ -194,6 +181,7 @@ public class Client {
 
                 case 2:
                     list.get(i).addVehicle();
+                    si.setUserList(list);
                     break;
 
                 case 3:
@@ -204,6 +192,7 @@ public class Client {
                         System.out.println("Vehicle not registered!");
                     else {
                         list.get(i).getvehicles().remove(k[0]);
+                        si.setUserList(list);
                         System.out.println("Vehicle removed successfull!");
                     }
                     break;
@@ -250,7 +239,7 @@ public class Client {
                 case 9:
                     try {
                         QRCodeGenerator QR = new QRCodeGenerator();
-                        QR.generateQRCodeImage(list.get(i).getId()+list.get(i).getVehicle(), 350, 350, "./QRcode/MyQRCode"+list.get(i).getId()+".png");
+                        QR.generateQRCodeImage(list.get(i).getId()+list.get(i).getvehicles().toString(), 350, 350, "./QRcode/MyQRCode"+list.get(i).getId()+".png");
                     } catch (WriterException e) {
                         System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
                     } catch (IOException e) {

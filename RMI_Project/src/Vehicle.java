@@ -20,6 +20,9 @@ Vehicle(String t, String h, String lp, String d, String b) {
 public String toString() {
     return "\n\n\t\t"+brand+"\n\t\t"+type+"\n\t\t"+hp+"\n\t\t"+licensePlate+"\n\t\t"+displacement+"\n\n";
 }
+public String StringToFile() {
+    return " "+brand+" "+type+" "+hp+" "+licensePlate+" "+displacement+"\t";
+}
 
 public String getBrand() {return brand;}
 public String getLicensePlate() {return licensePlate;}
