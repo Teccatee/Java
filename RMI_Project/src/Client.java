@@ -89,7 +89,7 @@ public class Client {
                            if(k[1]==0)
                                System.out.println("\nError, user not found");
                            else
-                               System.out.println(list.get(k[0]).toString()+list.get(k[0]).getvehicles().toString());
+                               System.out.println("User: \n"+list.get(k[0]).toString()+"\nVehicles: \n"+list.get(k[0]).getvehicles().toString());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -197,10 +197,12 @@ public class Client {
                     System.out.println("Enter vehicle brand: ");
                     String f= log.next();
                     k = list.get(0).FindVehicle(f,0, list.get(0).getvehicles());
-                    int j = 0;
+                    int j = 0, l=0;
+                    System.out.println("\t\tSearching Vehicles "+f+" on database...");
                     while (true) {
                         if (k[1] == 1) {
-                            System.out.println(list.get(j).getvehicles().get(k[0]).toString() +"Vehicle registered to: " + list.get(j).getId());
+                            l++;
+                            System.out.println("\n\nn°"+l+list.get(j).getvehicles().get(k[0]).toString() +"\t\tVehicle registered to: " + list.get(j).getId());
                         }
                         if (k[0] < list.get(j).getvehicles().size()) {
                             k[0]++;

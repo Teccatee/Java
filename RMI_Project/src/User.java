@@ -70,7 +70,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "\n\n\t\t" + name + "\n\t\t" + surname + "\n\t\t" + email;
+        return "\n\n\t\tName: " + name + "\n\t\tSurname: " + surname + "\n\t\tEmail@: " + email;
     }
 
     public String StringToFile() {

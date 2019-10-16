@@ -18,7 +18,7 @@ Vehicle(String t, String h, String lp, String d, String b) {
 }
 
 public String toString() {
-    return "\n\n\t\t"+brand+"\n\t\t"+type+"\n\t\t"+hp+"\n\t\t"+licensePlate+"\n\t\t"+displacement+"\n\n";
+    return "\n\n\t\tBrand: "+brand+"\n\t\tType: "+type+"\n\t\tHp: "+hp+"\n\t\tLicense plate: "+licensePlate+"\n\t\tDispacement: "+displacement;
 }
 public String StringToFile() {
     return " "+brand+" "+type+" "+hp+" "+licensePlate+" "+displacement+"\t";

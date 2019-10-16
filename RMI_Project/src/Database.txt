@@ -2,4 +2,4 @@ Daniel Pispisa danielpispisa@gmail.com Pispis 92	 Seat_cordoba auto 75 AL997YG 1
 a a a a a	 BRAND1 TYPE1 CV1 LICENSE1 1600	 BRAND2 TYPE2 CV2 LICENSE2 1600	 BRAND3 TYPE3 CV3 LICENSE3 1600	
 b b b b b	 1 1 1 1 1	 2 2 2 2 2	
 c c c c c	 v v v v v	 s s s s s	
-f f f f f	 2 2 2 2 2	 2 2 2 2 2	
+f f f f f	 2 2 2 2 2	 2 2 2 2 2	 n n n n n	
