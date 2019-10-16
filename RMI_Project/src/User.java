@@ -28,10 +28,10 @@ public class User implements Serializable {
         this.vehicles=a;
     }
 
-    public int [] FindVehicle (String f, int i) {
+    public int [] FindVehicle (String f, int i, List<Vehicle> v) {
         int k = 0;
-        for(; i<vehicles.size(); i++) {
-            if (vehicles.get(i).getBrand().compareTo(f) == 0) {
+        for(; i<v.size(); i++) {
+            if (v.get(i).getBrand().compareTo(f) == 0) {
                 k = 1;
                 break;
             }
@@ -48,6 +48,7 @@ public class User implements Serializable {
             }
         return new int[] {i, k};
     }
+
     public void addVehicle() {
         Scanner p = new Scanner(System.in);
         System.out.printf("Enter brand: ");

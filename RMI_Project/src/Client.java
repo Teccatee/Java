@@ -70,10 +70,6 @@ public class Client {
                                 String s = log.next();
                                 System.out.printf("\n\t\tEmail = ");
                                 String e = log.next();
-                                System.out.printf("\n\t\tVehichle = ");
-                                String v = log.next();
-                                System.out.printf("\n\t\tCV = ");
-                                String c = log.next();
                                 System.out.printf("\n\t\tPassword = ");
                                 String p = log.next();
                                 si.addUsers(list, n, s, e, id, p, true);
@@ -200,18 +196,22 @@ public class Client {
                 case 4:
                     System.out.println("Enter vehicle brand: ");
                     String f= log.next();
-                    k = list.get(0).FindVehicle(f, 0);
-                    for (int j=0; j<list.size(); j++) {
-                        System.out.println("indice user: "+  k[0]+1);
+                    k = list.get(0).FindVehicle(f,0, list.get(0).getvehicles());
+                    int j = 0;
+                    while (true) {
                         if (k[1] == 1) {
                             System.out.println(list.get(j).getvehicles().get(k[0]).toString() +"Vehicle registered to: " + list.get(j).getId());
                         }
                         if (k[0] < list.get(j).getvehicles().size()) {
-                            k = list.get(j).FindVehicle(f, k[0] + 1);
-                            j--;
+                            k[0]++;
+                            k = list.get(j).FindVehicle(f, k[0], list.get(j).getvehicles());
                         }
-                        else
-                            k = list.get(j).FindVehicle(f, 0);
+                        else{
+                            j++;
+                            if(j>=list.size())
+                                break;
+                            k = list.get(j).FindVehicle(f, 0, list.get(j).getvehicles());
+                            }
                     }
                     break;
 
