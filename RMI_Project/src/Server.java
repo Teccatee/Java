@@ -15,39 +15,44 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
     public List<User> getUserList() { return userList; }
 
-    public void setUserList(List<User> a) {
-        userList = a;
-        SaveToTxtFile(userList);
-           }
+    public Server(List<User> list) throws RemoteException {
+        super();
+        userList = list;
+    }
 
     public Server() throws RemoteException {
         super();
     }
 
-    public Server(List<User> list) throws RemoteException {
-        super();
-        this.userList = list;
+    public static void main(String[] args) {
+
+        try {
+            System.setProperty("java.rmi.server.hostname", "localhost");
+            Registry registry = LocateRegistry.getRegistry();
+            ServerInterface si = new Server(initializeList());
+            Naming.rebind("databaseservice", si);
+            Server server = new Server();
+            server.LoadTxtFile();
+            System.out.println("Server Aggiornato...");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setUserList(List<User> a) {
+        userList = a;
+        SaveToTxtFile();
     }
 
     @Override
-    public String logIn(String a, List<User> c) throws RemoteException {
-        int result [] = FindUser(a, c);
+    public String logIn(String a) throws RemoteException {
+        int[] result = FindUser(a);
         if(result[1]==1)
-                return c.get(result[0]).getPsw();
+            return userList.get(result[0]).getPsw();
         else
         return "Fail";
-    }
-
-    @Override
-    public int[] FindUser(String b, List<User> d) throws RemoteException {
-        int j, k=0;
-        for (j = 0; j < d.size(); j++) {
-            if (d.get(j).getId().compareTo(b) == 0) {
-            k=1;
-            break;
-            }
-        }
-        return new int[]{j, k};
     }
 
     public int[] FindQRcode (String vecId) throws RemoteException {
@@ -64,22 +69,23 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public List<User> allUsers() throws RemoteException {
-        return userList;
+    public int[] FindUser(String b) throws RemoteException {
+        List<User> d = userList;
+        int j, k = 0;
+        for (j = 0; j < d.size(); j++) {
+            if (d.get(j).getId().compareTo(b) == 0) {
+                k = 1;
+                break;
+            }
+        }
+        return new int[]{j, k};
     }
 
     @Override
-    public void addUsers(List<User> new_list, String n, String s, String e, String id, String p, boolean f) throws RemoteException {
-        this.userList.add(new User(n, s, e, id, p));
+    public void addUsers(String n, String s, String e, String id, String p, boolean f) throws RemoteException {
+        userList.add(new User(n, s, e, id, p));
         if (f==true)
-         SaveToTxtFile(userList);
-    }
-
-    @Override
-    public void removeUser(List<User> new_list, int i) throws RemoteException  {
-        new_list.remove(i);
-        setUserList(new_list);
-        SaveToTxtFile(new_list);
+            SaveToTxtFile();
     }
 
     private static List<User> initializeList() {
@@ -87,8 +93,14 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return list;
     }
 
-    public void SaveToTxtFile (List <User> c) {
-        c = getUserList();
+    @Override
+    public void removeUser(int i) throws RemoteException {
+        userList.remove(i);
+        SaveToTxtFile();
+    }
+
+    public void SaveToTxtFile() {
+        List<User> c = userList;
         FileWriter fw = null;
         try {
             fw = new FileWriter("Database.txt", false);
@@ -126,7 +138,8 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         }
     }
 
-    public void LoadTxtFile (List<User> c) {
+    public void LoadTxtFile() {
+        List<User> c = userList;
         int j=0;
         BufferedReader reader = null;
         try {
@@ -144,15 +157,15 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                     String e= (String) st.nextElement();
                     String id= (String) st.nextElement();
                     String p= (String) st.nextElement();
-                    int i[]=FindUser(id, c);
+                int[] i = FindUser(id);
                     j++;
                     if (i[1]==1) {
                         j--;
                         break;
                     }
                     else {
-                        addUsers(c, n, s, e, id, p, false);
-                        i = FindUser(id, c);
+                        addUsers(n, s, e, id, p, false);
+                        i = FindUser(id);
                         List <Vehicle> new_VehicleList = getUserList().get(i[0]).getvehicles();
                         while (st.hasMoreElements()) {
                             String brand = (String) st.nextElement();
@@ -171,26 +184,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             e.printStackTrace();
         }
         try {
-          SaveToTxtFile(userList);
+            SaveToTxtFile();
           reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String args[]){
-
-        try {
-            System.setProperty("java.rmi.server.hostname","localhost");
-            Registry registry = LocateRegistry.getRegistry();
-            ServerInterface si = new Server(initializeList());
-            Naming.rebind("databaseservice",si);
-            Server server = new Server();
-            server.LoadTxtFile(userList);
-            System.out.println("Server Aggiornato...");
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }

@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 public class Client {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         String address = args[0];
         String servicename = args[1];
 
@@ -33,14 +33,14 @@ public class Client {
                         list = si.getUserList();
                         System.out.printf("\n\n\t\tUser ID = ");
                         String id = log.next();
-                        String access = si.logIn(id, list);
+                        String access = si.logIn(id);
                         if(access.compareTo("Fail")==0)
                             System.out.println("\n\t\tUser not found!\n");
                         else {
                             System.out.printf("\n\t\tPassword = ");
                             String psw = log.next();
                             if (access.compareTo(psw) == 0) {
-                                int i[] = si.FindUser(id, list);
+                                int[] i = si.FindUser(id);
                                 list = si.getUserList();
                                 menu(id, list, i[0], si);
                             }
@@ -72,7 +72,7 @@ public class Client {
                                 String e = log.next();
                                 System.out.printf("\n\t\tPassword = ");
                                 String p = log.next();
-                                si.addUsers(list, n, s, e, id, p, true);
+                                si.addUsers(n, s, e, id, p, true);
                                 break;
                             }
                         }
@@ -85,7 +85,7 @@ public class Client {
                         decodeQRCode dec = new decodeQRCode();
                         try {
                            String vecId = dec.decodeQRCode(file);
-                           int k[]=si.FindQRcode(vecId);
+                            int[] k = si.FindQRcode(vecId);
                            if(k[1]==0)
                                System.out.println("\nError, user not found");
                            else
@@ -183,7 +183,7 @@ public class Client {
                 case 3:
                     System.out.printf(list.get(i).getvehicles().toString()+"\n\n\nWhich vehicle do you want to remove?\nEnter license plate: ");
                     String s=log.next();
-                    int k[]=list.get(i).FindLicensePlate(s);
+                    int[] k = list.get(i).FindLicensePlate(s);
                     if (k[1]==0)
                         System.out.println("Vehicle not registered!");
                     else {
@@ -194,6 +194,7 @@ public class Client {
                     break;
 
                 case 4:
+                    list = si.getUserList();
                     System.out.println("Enter vehicle brand: ");
                     String f= log.next();
                     k = list.get(0).FindVehicle(f,0, list.get(0).getvehicles());
@@ -222,13 +223,15 @@ public class Client {
                     break;
 
                 case 6:
+                    list = si.getUserList();
                    System.out.println(list);
                    break;
 
                 case 7:
+                    list = si.getUserList();
                     System.out.println("Enter UserID: ");
                     s=log.next();
-                    k=si.FindUser(s, list);
+                    k = si.FindUser(s);
                     if (k[1]==1)
                         System.out.println(list.get(k[0]).toString()+list.get(k[0]).getvehicles().toString());
                     else
@@ -236,7 +239,7 @@ public class Client {
                     break;
 
                 case 8:
-                    si.removeUser(list, i);
+                    si.removeUser(i);
                     flag = false;
                     break;
 
