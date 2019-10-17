@@ -114,7 +114,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         List<User> c = userList;
         FileWriter fw = null;
         try {
-            fw = new FileWriter("Database.txt", false);
+            fw = new FileWriter("database.backup", false);
             fw.write("Last update at: " + Time + date + "\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -156,13 +156,13 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         int j=0;
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new FileReader("Database.txt"));
+            reader = new BufferedReader(new FileReader("database.backup"));
         } catch (FileNotFoundException e) {
             System.out.printf("\nError, local database not found!\n");
             e.printStackTrace();
         }
         try {
-            String line = reader.readLine();
+            String line = reader.readLine(); //Reading time and date from txt
             line = reader.readLine();
             while (line!=null) {
                 StringTokenizer st = new StringTokenizer(line);
