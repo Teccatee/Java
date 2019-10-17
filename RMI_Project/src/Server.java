@@ -25,7 +25,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public static void main(String[] args) {
 
         try {
-            System.setProperty("java.rmi.server.hostname", "localhost");
+            System.setProperty("java.rmi.server.hostname", "151.97.159.219");
             Registry registry = LocateRegistry.getRegistry();
             ServerInterface si = new Server(initializeList());
             Naming.rebind("databaseservice", si);
@@ -144,7 +144,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
             }
         }
         try {
-            System.out.println("\n\n\t\tDatabase update at: " + Time);
+            System.out.println("\n\n\t\tUpdated local database at: " + Time);
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

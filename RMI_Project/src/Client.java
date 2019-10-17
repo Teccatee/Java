@@ -203,7 +203,7 @@ public class Client {
                     while (true) {
                         if (k[1] == 1) {
                             l++;
-                            System.out.println("\n\nn°"+l+list.get(j).getvehicles().get(k[0]).toString() +"\t\tVehicle registered to: " + list.get(j).getId());
+                            System.out.println("\n\nn " + l + list.get(j).getvehicles().get(k[0]).toString() + "\t\tVehicle registered to: " + list.get(j).getId());
                         }
                         if (k[0] < list.get(j).getvehicles().size()) {
                             k[0]++;
