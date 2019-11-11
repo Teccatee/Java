@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ServerInterface extends Remote {
 
-    String logIn(String a) throws RemoteException;
+    int logIn(String a) throws RemoteException;
 
     int[] FindUser(String a) throws RemoteException;
     int [] FindQRcode(String vecID) throws RemoteException;

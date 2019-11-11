@@ -25,7 +25,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     public static void main(String[] args) {
 
         try {
-            System.setProperty("java.rmi.server.hostname", "151.97.159.219");
+            System.setProperty("java.rmi.server.hostname", "localhost");
             Registry registry = LocateRegistry.getRegistry();
             ServerInterface si = new Server(initializeList());
             Naming.rebind("databaseservice", si);
@@ -57,12 +57,12 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public String logIn(String a) throws RemoteException {
+    public int logIn(String a) throws RemoteException {
         int[] result = FindUser(a);
         if (result[1] == 1)
-            return userList.get(result[0]).getPsw();
+            return userList.get(result[0]).getPsw().hashCode();
         else
-            return "Fail";
+            return 0;
     }
 
     @Override

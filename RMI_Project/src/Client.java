@@ -33,13 +33,13 @@ public class Client {
                         list = si.getUserList();
                         System.out.printf("\n\n\t\tUser ID = ");
                         String id = log.next();
-                        String access = si.logIn(id);
-                        if(access.compareTo("Fail")==0)
+                        int access = si.logIn(id);
+                        if (access == 0)
                             System.out.println("\n\t\tUser not found!\n");
                         else {
                             System.out.printf("\n\t\tPassword = ");
                             String psw = log.next();
-                            if (access.compareTo(psw) == 0) {
+                            if (access == psw.hashCode()) {
                                 int[] i = si.FindUser(id);
                                 list = si.getUserList();
                                 menu(id, list, i[0], si);

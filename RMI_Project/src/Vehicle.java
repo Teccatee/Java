@@ -23,7 +23,6 @@ public String toString() {
 public String StringToFile() {
     return " "+brand+" "+type+" "+hp+" "+licensePlate+" "+displacement+"\t";
 }
-
 public String getBrand() {return brand;}
 public String getLicensePlate() {return licensePlate;}
 public String getType() {return type;}
